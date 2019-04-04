@@ -1,0 +1,84 @@
+#container{
+  grid-template-columns: 300px auto;
+  grid-template-areas: "left right";
+  grid-column-gap: 20px;
+  display: grid;
+  height:100%;
+}
+#left {
+  grid-area: left;
+}
+#left textarea{
+  width: 100%;
+  height: 100%;
+}
+#right {
+  grid-area: right;
+  position: relative;
+}
+
+
+
+
+
+.tbl{
+  postion:absolute;
+  display:inline-block;
+  min-width:150px;
+  background-color: #eee;
+  padding-bottom: .5em;
+  user-select: none;
+
+}
+
+.code-editor textarea {
+  -webkit-appearance:none;
+  border:none;
+  background: transparent;
+  color: transparent;
+
+  z-index: 1;
+  overflow-y:scroll;
+
+}
+.code-editor .method {color: #c89c6e;}
+.code-editor .type {color: #6fb4c0;}
+
+.code-editor textarea, .code-editor .rendered-code{
+  padding: 1em .5em 1em 1em;
+  font-family: 'Menlo',monospace;
+  font-size: 12px;
+
+  height:100%; width:100%;
+  max-height:100%;
+  position: absolute;
+  top:0;
+  left:0; right:0; bottom:0;
+
+
+}
+.code-editor .rendered-code {
+  overflow:hidden;
+  background-color: #292c34;
+  color:#acb2be;
+}
+.code-editor {overflow: hidden; max-height:100%;height: 100%; position:relative;}
+textarea:focus {
+  border:none;
+
+}
+.tbl_row {
+  padding: .25em .5em;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "left right";
+}
+.field_name {text-align:left;}
+.field_type {color: rgba(0,0,0,.5); grid-area: right; text-align:right;}
+.tbl_header {
+  background:#545454;
+  color: #fff;
+  padding: .5em;
+  text-align:center;
+}
