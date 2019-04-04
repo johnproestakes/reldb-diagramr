@@ -1,6 +1,21 @@
 var PaperHelperClass= function(paper){
   this.paper = paper;
 };
+PaperHelperClass.prototype.drawX = function(start, end){
+
+  var left = new paper.Path.Rectangle(end, new paper.Size(6, 18));
+  var right = new paper.Path.Rectangle(end, new paper.Size(6, 18));
+  left.rotate(-45);
+  right.rotate(45);
+  var b = left.unite(right);
+  b.position.x = b.position.x-3;
+  b.position.y = b.position.y-9;
+  b.fillColor = 'red';
+  b.strokeColor = 'white';
+  b.strokeWidth = 3;
+
+  return b;
+};
 PaperHelperClass.prototype.drawArrow = function(end, direction, rotation){
   if(rotation===undefined) rotation = 0;
   var arr = new this.paper.Path();
@@ -24,7 +39,7 @@ PaperHelperClass.prototype.drawEndPoint = function(end){
   var stCircle = new paper.Path.Circle(end, 5);
   stCircle.fillColor = '#545454';
   return stCircle;
-}
+};
 PaperHelperClass.prototype.drawLineBtwnPoints = function(start, end){
   var side = start.x < end.x ? "left" : "right";
   var seg1 = new paper.Segment(

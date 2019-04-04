@@ -37,7 +37,8 @@ var Workspace = function(text, $scope){
   this.__tablePattern = /Table\s(.*)\s+{((.|\n)*?)}/gm;
   this.connectionTypes=[{type: "left_join",  symbol: ">"},
     {type: "right_join",  symbol: "<"},
-    {type: "inner_join",  symbol: "="}];
+    {type: "inner_join",  symbol: "="},
+    {type:"anti_join",symbol:"-"}];
 
   this.setupCanvas(function(){
     _this.$scope.$apply(function(){
@@ -103,7 +104,7 @@ Workspace.prototype.drawConnections = function(){
         el2.y+ el2.height*1/2);
 
       var side = start.x < end.x ? "left" : "right";
-      PaperHelpers.drawLineBtwnPoints(start, end);
+      var line = PaperHelpers.drawLineBtwnPoints(start, end);
 
       if(xtion.type=="left_join"){
         PaperHelpers.drawArrow(end, side);
@@ -114,6 +115,10 @@ Workspace.prototype.drawConnections = function(){
         a.position = [start.x+ (3 *(start.x<end.x ? 1 : -1)),start.y];
         paper.view.draw();
         PaperHelpers.drawEndPoint(end);
+      } else if (xtion.type=="anti_join") {
+        end = line.getPointAt(line.length/2);
+        PaperHelpers.drawX(start, end);
+        line.strokeColor = 'red';
       } else {
         PaperHelpers.drawEndPoint(start);
         PaperHelpers.drawEndPoint(end);
